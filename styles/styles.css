@@ -1,0 +1,191 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+.title {
+  position: absolute;
+  z-index: 9999;
+  top: 0;
+  color: white;
+  font-family: monospace;
+  font-size: 3rem;
+  text-align: center;
+  width: 100vw;
+  margin-top: 16rem;
+}
+
+.title h2 {
+  margin-top: -5rem;
+}
+
+body {
+    box-sizing: content-box;
+    margin: 0;
+    background: #222;
+    overflow: hidden;
+}
+
+div#grid-container {
+    height: 110vh;
+    width: 100vw;
+    display: table;
+    margin-top: -2rem;
+    background: #222;
+}
+
+div#grid-bg {
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: #000;
+  background-repeat: no-repeat;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+}
+
+pre#grid {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    font-size: 8px;
+    font-family: 'Press Start 2P';
+    display: table-cell;
+    color: #FFF;
+    position: relative;
+    background: #000;
+    mix-blend-mode: lighten;
+}
+
+div .ascii-art{
+    display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+
+}
+div .ascii-art2{
+    display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+
+}
+
+div .ascii-artReverse{
+  display: flex;
+justify-content: center;
+align-items: center;
+height: 100vh;
+width: 100vw;
+
+}
+div .ascii-artReverse2{
+  display: flex;
+justify-content: center;
+align-items: center;
+height: 100vh;
+width: 100vw;
+
+}
+
+.ascii-art {
+  position: absolute;
+    top:  0;
+    margin-top: 0;
+    margin-left: -2.5rem;
+    font-size: 20pt;
+    font-family: monospace;
+    line-height: 2rem;
+    visibility: hidden;
+    white-space: pre;
+    color: white;
+    filter: drop-shadow(1px 1px 7px #ffffff);
+}
+
+.ascii-art2 {
+    position: absolute;
+    top:  0;
+    margin-top: 0;
+    margin-left: -2rem;
+    line-height: 2rem;
+    visibility: hidden;
+    font-size: 20pt;
+    font-family: monospace;
+    white-space: pre;
+    color: white;
+    filter: drop-shadow(1px 1px 7px #ffffff);
+}
+
+.ascii-artReverse {
+  position: absolute;
+  top:  0;
+  margin-top: 0;
+  margin-left: 0rem;
+  line-height: 2rem;
+  visibility: hidden;
+  font-size: 20pt;
+  font-family: monospace;
+  white-space: pre;
+  background: linear-gradient(to right, red,  orange , yellow, green, cyan, blue, indigo, violet);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(1px 1px 7px #ffffff);
+}
+
+.ascii-artReverse2 {
+  position: absolute;
+  top:  0;
+  margin-top: 0;
+  margin-left: 0.5rem;
+  line-height: 2rem;
+  visibility: hidden;
+  font-size: 20pt;
+  font-family: monospace;
+  white-space: pre;
+  background: linear-gradient(to right, red,  orange , yellow, green, cyan, blue, indigo, violet);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(1px 1px 7px #ffffff);
+}
+
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  visibility: hidden;
+}
+.hexagon {
+  position: absolute;
+  width: 90px;
+  height: 100px;
+  background: linear-gradient(to right, red,  orange , yellow, green, cyan, blue, indigo, violet);
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  opacity: 0.6;
+}
+.pulse {
+  animation: pulse 0.2s ease-out;
+}
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  60% {
+    transform: scale(1.4);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+}
+
+
+
+
