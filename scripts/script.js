@@ -2,13 +2,17 @@ const gridElem = document.querySelector('#grid');
 const gridElemBg = document.querySelector('#grid-bg');
 const gridElemContent = document.querySelector('#grid-content');
 const gridFontSize = parseInt(getComputedStyle(gridElem).fontSize, 10);
+const img = document.querySelector('#image');
+//const gridFontSize = parseInt(30, 10);
+//console.log(getComputedStyle(gridElem).fontSize);
 
 
 
-var colCount = 0;
-var rowCount = 0;
-var pixelCount = 0;
-var pixels = [];
+
+let colCount = 0;
+let rowCount = 0;
+let pixelCount = 0;
+let pixels = [];
 
 const charRangeStart = 33;
 const charRangeEnd = 56;
@@ -100,6 +104,8 @@ function render(ticks = 0) {
   animationId = requestAnimationFrame(render);
 }
 
+//tot hier eerste visual
+
 window.addEventListener('resize', updateSize);
 
 const background = document.querySelector(".background");
@@ -155,13 +161,73 @@ function pulse() {
 setInterval(pulse, Math.floor(Math.random() * maxInterval + minInterval));
 
 
+// Play with these!
+const PX = 600;
+const N = 20;
+const SPEED = 6;
+const RANGE = [40, 400];
 
+let a, b, c, d;
+setCoefficients();
+const fn = (x, y) => [a * x + b * y, c * x + d * y];
+
+// Derived.
+const SPACING = PX / N;
+const HALF_PX = PX / 2;
+const HALF_N = Math.floor(N / 2) + 1;
+if (RANGE[0] < SPEED) RANGE[0] = SPEED;
+
+const container = document.querySelector('.container');
+const canvas = document.createElement('canvas');
+canvas.height = canvas.width = PX;
+canvas.style.height = canvas.style.width = `1785px`;
+container.appendChild(canvas);
+
+const ctx = canvas.getContext('2d');
+ctx.translate(HALF_PX, HALF_PX);
+ctx.globalCompositeOperation = 'xor';
+
+let dir = 5;
+let lw = RANGE[0] + SPEED;
+(function draw () {
+	if (lw <= RANGE[0] || lw > RANGE[1]) dir = -dir;
+	lw = ctx.lineWidth = lw + dir * SPEED;
+	
+	ctx.clearRect(-HALF_PX, -HALF_PX, PX, PX);
+	for (let y = -HALF_N; y < HALF_N; ++y) {
+		const yPx = y * SPACING;
+		ctx.beginPath();
+		for (let x = -HALF_N; x < HALF_N; ++x) {
+			const xPx = x * SPACING;
+			ctx.moveTo(xPx, yPx);
+			ctx.lineTo(...fn(xPx, yPx));
+		}
+		ctx.stroke();
+	}
+	
+	requestAnimationFrame(draw);
+})();
+
+function setCoefficients () {
+	a = (Math.random() < 0.5) * 2 - 1;
+	b = (Math.random() < 0.5) * 2 - 1;
+	c = (Math.random() < 0.5) * 2 - 1;
+	d = (Math.random() < 0.5) * 2 - 1;
+}
+
+let randomColor = "red";
+ctx.strokeStyle = randomColor;
+ctx.stroke();
+
+container.addEventListener('click', setCoefficients, false);
 
 
 const audioElementMusic = document.getElementById('audio');
 let isPlayingMusic = false;
+let showInfo = false;
 const audioElementDrums = document.getElementById('audio2');
 const audioElementFull = document.getElementById('audio3');
+const audioElementCalmDown = document.getElementById('audio4');
 let isPlayingDrums = false;
 let isPlayingFull = false;
 const art = document.getElementById('ascii-art');
@@ -173,7 +239,7 @@ const titel = document.querySelector('#titel')
 let animationId;
 
 document.addEventListener('keydown', function(e) {
-  if (e.keyCode == 77 || e.keyCode == 71 || e.keyCode == 78 || e.keyCode == 66 || e.keyCode == 86 || e.keyCode == 72 || e.keyCode == 70 || e.keyCode == 82) {
+  if (e.keyCode == 77 || e.keyCode == 71 || e.keyCode == 78 || e.keyCode == 86 || e.keyCode == 72 || e.keyCode == 70 || e.keyCode == 82 || e.keyCode == 69 || e.keyCode == 65 || e.keyCode == 76) {
     if (isPlayingMusic) {
       audioElementMusic.pause();
       isPlayingMusic = false;
@@ -185,7 +251,7 @@ document.addEventListener('keydown', function(e) {
       art.style.visibility = 'visible'; // show the div
       titel.style.display = 'none';
     }
-  } else if (e.keyCode == 68) {
+  } else if (e.keyCode == 68 || e.keyCode == 85 || e.keyCode == 79 || e.keyCode == 80 ||e.keyCode == 74 || e.keyCode == 83 || e.keyCode == 75 || e.keyCode == 90 || e.keyCode == 88 || e.keyCode == 66) {
     if (isPlayingDrums) {
       audioElementDrums.pause();
       isPlayingDrums = false;
@@ -216,17 +282,18 @@ document.addEventListener('keydown', function(e) {
       art.style.textShadow = "30px 13px rgba(246, 0, 153,0.8),  -38px -4px rgba(15, 210, 255,0.8), -2px -4px rgba(255, 210, 0, 1)" // hide the div
     }
   }
-  if (e.keyCode == 77) {
+  if (e.keyCode == 77 || e.keyCode == 65) {
     if (isPlayingMusic) {
       gridElem.style.display = 'grid';
       updateSize()
     } else {
       gridElem.style.display = 'none';
+
       
     }
   }
 
-  if (e.keyCode == 71) {
+  if (e.keyCode == 71 || e.keyCode == 86) {
     if (isPlayingMusic) {
       art.style.textShadow = "30px 13px rgba(246, 0, 153,0.8),  -38px -4px rgba(15, 210, 255,0.8), -2px -4px rgba(255, 210, 0, 1)" // hide the div
       
@@ -245,7 +312,7 @@ document.addEventListener('keydown', function(e) {
     }
   }
 
-  if (e.keyCode == 72) {
+  if (e.keyCode == 72 || e.keyCode == 76) {
     if (isPlayingMusic) {
       background.style.visibility = "visible" // hide the div
       
@@ -253,6 +320,64 @@ document.addEventListener('keydown', function(e) {
       background.style.visibility = "hidden"
     }
   }
+
+  if (e.keyCode == 69 || e.keyCode == 70 || e.keyCode == 78) {
+    if (isPlayingMusic) {
+      container.style.visibility = "visible" // hide the div
+      
+    } else {
+      container.style.visibility = "hidden"
+    }
+  }
+
+  if (e.keyCode == 85 || e.keyCode == 66) {
+    if (isPlayingDrums) {
+      container.style.visibility = "visible" // hide the div
+      
+    } else {
+      container.style.visibility = "hidden"
+
+    }
+  }
+
+  if (e.keyCode == 75 || e.keyCode == 90) {
+    if (isPlayingDrums) {
+      background.style.visibility = "visible" // hide the div
+      
+    } else {
+      background.style.visibility = "hidden"
+    }
+  }
+
+  if (e.keyCode == 79 || e.keyCode == 88) {
+    if (isPlayingDrums) {
+      art2.style.textShadow = "30px 13px rgba(246, 0, 153,0.8),  -38px -4px rgba(15, 210, 255,0.8), -2px -4px rgba(255, 210, 0, 1)" // hide the div
+      
+    } else {
+      art2.style.textShadow = "none";
+      
+      
+    }
+  }
+  if (e.keyCode == 74 || e.keyCode == 83) {
+    if (isPlayingDrums) {
+      gridElem.style.display = 'grid';
+      updateSize()
+    } else {
+      gridElem.style.display = 'none';
+      
+    }
+  }
+
+  if (e.keyCode == 80) {
+    if (isPlayingDrums) {
+      art2.style.color = "red" // hide the div
+      
+    } else {
+      art2.style.color = "white";
+    }
+  }
+
 
   if (e.keyCode == 84) {
     if (isPlayingMusic) {
@@ -317,5 +442,115 @@ document.addEventListener('keydown', function(e) {
       artR2.style.webkitBackgroundClip = 'text';
     }
   }
+  if (e.keyCode == 73) {
+    if (showInfo) {
+      keyboard.style.visibility = "hidden"
+
+      showInfo = false; // hide the div
+      
+    } else {
+      keyboard.style.visibility = "visible"
+      showInfo = true;
+    }
+  }
 });
 
+document.addEventListener('keydown', function(e) {
+  if (e.keyCode == 67) { // Check if 'c' key is pressed
+    // Show the image
+    img.style.visibility = 'visible';
+    keyboard.style.visibility = "hidden"
+    audioElementDrums.pause();
+    audioElementMusic.pause();
+    audioElementFull.pause();
+    audioElementCalmDown.play();
+    isPlayingDrums = false;
+    artR2.style.visibility = 'hidden';
+    artR.style.visibility = 'hidden';
+    art.style.visibility = 'hidden';
+    art2.style.visibility = 'hidden';
+    titel.style.display = 'none';
+    gridElem.style.display = 'none';
+    container.style.visibility = "hidden"
+    background.style.visibility = "hidden"
+  } else {
+    // Hide the img
+    img.style.visibility = 'hidden';
+    audioElementCalmDown.pause();
+    // Rest of your code for handling other keys
+    if (e.keyCode == 77 || e.keyCode == 71 || e.keyCode == 78 || e.keyCode == 86 || e.keyCode == 72 || e.keyCode == 70 || e.keyCode == 82 || e.keyCode == 69 || e.keyCode == 65 || e.keyCode == 76) {
+      // Handle music related logic
+    } else if (e.keyCode == 68 || e.keyCode == 85 || e.keyCode == 79 || e.keyCode == 80 ||e.keyCode == 74 || e.keyCode == 83 || e.keyCode == 75 || e.keyCode == 90 || e.keyCode == 88 || e.keyCode == 66) {
+      // Handle drums related logic
+    }
+    // Rest of your code for handling other keys
+  }
+});
+
+function getKey (e) {
+  let location = e.location;
+  let selector;
+  if (location === KeyboardEvent.DOM_KEY_LOCATION_RIGHT) {
+      selector = ['[data-key="' + e.keyCode + '-R"]']
+  } else {
+      let code = e.keyCode || e.which;
+      selector = [
+          '[data-key="' + code + '"]',
+          '[data-char*="' + encodeURIComponent(String.fromCharCode(code)) + '"]'
+      ].join(',');
+  }
+  return document.querySelector(selector);
+}
+
+function pressKey (char) {
+  let key = document.querySelector('[data-char*="' + char.toUpperCase() + '"]');
+  if (!key) {
+      return console.warn('No key for', char);
+  }
+}
+
+let h1 = document.querySelector('h1');
+let originalQueue = h1.innerHTML;
+let queue = h1.innerHTML;
+
+function next () {
+
+  pressKey(c);
+
+}
+
+setTimeout(next, 500);
+
+function pressKey(char) {
+  let key = document.querySelector('[data-char*="' + char.toUpperCase() + '"]');
+  if (!key) {
+    return console.warn('No key for', char);
+  }
+  let isPressed = key.getAttribute('data-pressed');
+  if (isPressed === 'on') {
+    key.removeAttribute('data-pressed');
+  } else {
+    key.setAttribute('data-pressed', 'on');
+  }
+}
+
+document.body.addEventListener('keydown', function(e) {
+  let key = getKey(e);
+  if (!key) {
+    return console.warn('No key for', e.keyCode);
+  }
+
+  pressKey(key.getAttribute('data-char'));
+});
+
+function size () {
+  let size = keyboard.parentNode.clientWidth / 90;
+  keyboard.style.fontSize = size + 'px';
+  console.log(size);
+}
+
+const keyboard = document.querySelector('.keyboard');
+window.addEventListener('resize', function (e) {
+  size();
+});
+size();

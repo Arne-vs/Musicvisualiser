@@ -5,15 +5,15 @@
   z-index: 9999;
   top: 0;
   color: white;
-  font-family: monospace;
-  font-size: 3rem;
+  font-family: 'Press Start 2P';
+  font-size: 2rem;
   text-align: center;
   width: 100vw;
-  margin-top: 16rem;
+  margin-top: 19rem;
 }
 
 .title h2 {
-  margin-top: -5rem;
+  margin-top: -3rem;
 }
 
 body {
@@ -96,8 +96,8 @@ width: 100vw;
     top:  0;
     margin-top: 0;
     margin-left: -2.5rem;
-    font-size: 20pt;
-    font-family: monospace;
+    font-size: 15pt;
+  font-family: 'Press Start 2P';
     line-height: 2rem;
     visibility: hidden;
     white-space: pre;
@@ -112,8 +112,8 @@ width: 100vw;
     margin-left: -2rem;
     line-height: 2rem;
     visibility: hidden;
-    font-size: 20pt;
-    font-family: monospace;
+    font-size: 15pt;
+  font-family: 'Press Start 2P';
     white-space: pre;
     color: white;
     filter: drop-shadow(1px 1px 7px #ffffff);
@@ -126,8 +126,8 @@ width: 100vw;
   margin-left: 0rem;
   line-height: 2rem;
   visibility: hidden;
-  font-size: 20pt;
-  font-family: monospace;
+  font-size: 15pt;
+  font-family: 'Press Start 2P';
   white-space: pre;
   background: linear-gradient(to right, red,  orange , yellow, green, cyan, blue, indigo, violet);
   -webkit-background-clip: text;
@@ -142,8 +142,8 @@ width: 100vw;
   margin-left: 0.5rem;
   line-height: 2rem;
   visibility: hidden;
-  font-size: 20pt;
-  font-family: monospace;
+  font-size: 15pt;
+  font-family: 'Press Start 2P';
   white-space: pre;
   background: linear-gradient(to right, red,  orange , yellow, green, cyan, blue, indigo, violet);
   -webkit-background-clip: text;
@@ -187,5 +187,168 @@ width: 100vw;
 }
 
 
+.container{
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+	top: 50%;
+	left: 50%;
+  visibility: hidden;
+	transform: translate3d(-50%, -50%, 0);
+	box-shadow: 0 0 24px 8px rgba(0, 0, 0, 0.2);
+	cursor: pointer;
+
+}
+	
+.keyboard {
+  text-align: center;
+  font-size: 14px;
+  font-family: 'Press Start 2P';
+  position: absolute;
+  z-index: 99999;
+  top: 0;
+  margin-top: 40.5rem;
+  visibility: hidden;
+  background-color: #222;
+  width: 58.5%;
+  padding-top: 1rem;
+  border-radius: 0.3em;
+}
+
+.keyboard__row {
+  display: inline-block;
+  height: 3em;
+  margin: 0em;
+}
 
 
+.keyboard__row--h3 {
+  height: 3.3em;
+}
+
+.keyboard__row > * {
+  position: relative;
+  background: #333;
+  text-align: center;
+  color: #eee;
+  float: left;
+  border-radius: 0.3em;
+  margin: 0.1em;
+  padding: 0.1em;
+  width: 3.3em;
+  height: 100%;
+  box-sizing: border-box;
+  cursor: pointer;
+  -webkit-user-select: none;
+  border: 1px solid #444;
+  box-shadow: 0 0.2em 0 0.05em #222;
+  border-bottom-color: #555;
+}
+
+
+
+.keyboard__row > div[data-pressed],
+.keyboard__row > div:active {
+  background: #2a2a2a;
+  color: #aaa;
+  position: relative;
+  top: 0.1em;
+  box-shadow: 0 0 0 0.05em black;
+}
+
+.key--w3 {
+  width: 4.6em;
+}
+
+.key--w4 {
+  width: 6em;
+}
+
+.key--w5 {
+  width: 6.5em;
+}
+
+.key--w6 {
+  width: 8.3em;
+}
+
+.key--space {
+  width: 18em;
+}
+
+.key--double > * {
+  padding-top: 0.1em;
+  color: #606060;
+}
+
+.key--letter {
+  line-height: 2.8em;
+}
+
+.key--bottom-left > * {
+  position: absolute;
+  text-align: left;
+  bottom: 0.1em;
+  left: 0.1em;
+}
+
+.key--bottom-right > * {
+  position: absolute;
+  text-align: right;
+  bottom: 0.1em;
+  right: 0.1em;
+  color: #606060;
+}
+
+
+
+.key--word > * {
+  font-size: 0.4em;
+  color: #606060;
+}
+
+.key--arrow--tall > *,
+.key--arrow > * {
+  font-size: 0.5em;
+  line-height: 3em;
+  color: #606060;
+}
+
+.key--arrow {
+  height: 1.8em;
+  margin-top: 1.7em;
+  line-height: 0.5em;
+}
+
+.key--arrow--tall > * {
+  padding-top: 0.2em;
+}
+
+.keyboard > .keyboard__row {
+  text-align: center;
+}
+
+.keyboardCenter {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+}
+
+#image img {
+  width: 40%;
+  
+
+}
+
+#image {
+  position: absolute;
+  z-index: 999999999;
+  top: 0;
+  width: 100%;
+  margin-top: 4rem;
+  color: white;
+  font-family: 'Press Start 2P';
+  font-size: 0.5rem;
+  text-align: center;
+  visibility: hidden;
+}
